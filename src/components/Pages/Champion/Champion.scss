@@ -1,0 +1,462 @@
+.champ-info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 100vh;
+    padding-bottom: 10vh;
+
+    background: linear-gradient(90deg, $colorBackground, $colorBackground);
+
+    &::after {
+        content: "";
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        background-position: 50% 100%;
+        background-size: 100% 200%;
+        background-image: radial-gradient(circle, transparent, rgba($colorBackground, 0.25), $colorBackground);
+        pointer-events: none;
+        z-index: 50;
+
+        transition: all 0.5s ease-out;
+    }
+
+    &.scrolling {
+        &::after {
+            background-position: 50% 50%;
+            background-image: radial-gradient(circle, transparent, rgba($colorBackground, 0.5), $colorBackground);
+        }
+        .champ-splashart {
+            img {
+                opacity: 0.1;
+            }
+            video {
+                opacity: 0 !important;
+            }
+
+            &.animated img {
+                opacity: 0.1;
+            }
+        }
+        .champ-summary {
+            top: 40%;
+            opacity: 0;
+            z-index: 0;
+            visibility: hidden;
+        }
+        .my-swiper-slider {
+            opacity: 0;
+            transform: translateY(100%);
+        }
+        .champ-lore {
+            opacity: 1;
+        }
+        .champ-abilities-summary {
+            z-index: 1;
+        }
+    }
+
+    h2 {
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 4em;
+        color: $colorFont;
+        margin: 3rem 0;
+    }
+
+    .champ-splashart {
+        img {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 1;
+
+            transition: all 0.25s ease-out;
+        }
+
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            object-fit: cover;
+
+            transition: all 0.25s ease-out;
+        }
+
+        &.animated {
+            img {
+                opacity: 0;
+            }
+            video {
+                opacity: 1;
+            }
+        }
+    }
+
+    .champ-summary {
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        top: 50%;
+        left: 0;
+        right: 0;
+        opacity: 1;
+        z-index: 10;
+        text-align: center;
+        transform: translateY(-50%);
+
+        transition: all 0.1s ease-out;
+
+        h1 {
+            font-size: 5em;
+            color: $colorFontActive;
+        }
+
+        p {
+            font-size: 1.5em;
+            color: $colorFont;
+        }
+
+        small {
+            position: relative;
+            margin-bottom: 0.5em;
+            color: rgba($colorFont, 0.75);
+            user-select: none;
+            cursor: pointer;
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                right: 50%;
+                height: 1px;
+                background-color: rgba($colorFont, 0.75);
+
+                transition: all 0.1s ease-out;
+            }
+
+            &:hover {
+                &::after {
+                    left: 0;
+                    right: 0;
+                }
+            }
+        }
+    }
+
+    .my-swiper-slider {
+        position: fixed;
+
+        bottom: 10px;
+        left: 0;
+        z-index: 100;
+        width: 100%;
+
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+
+        .swiper-wrapper {
+            .swiper-slide {
+                transform: scale(0.75);
+                transition: transform 0.25s;
+                &-active {
+                    transform: scale(1);
+
+                    img {
+                        border: 5px solid rgba($colorFont, 0.5);
+                    }
+                }
+                img {
+                    width: 100%;
+
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+
+    .champ-lore {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 0;
+        opacity: 0;
+        padding-top: 66vh;
+
+        transition: opacity 0.1s ease-out;
+
+        div {
+            max-width: 60%;
+            color: $colorFontActive;
+        }
+    }
+
+    .champ-abilities-summary {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        h2 {
+            text-align: center;
+            flex: 0 0 100%;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            height: 5px;
+            width: 100%;
+            top: 60%;
+            left: 0;
+            background-color: $colorFont;
+            z-index: -1;
+        }
+
+        .champ-video-description {
+            position: relative;
+            height: calc(100vh - #{$heightNav} - 20px);
+            width: 75%;
+            background-color: $colorFont;
+            border: 5px solid $colorFont;
+            clip-path: polygon(25px 0%, 100% 0, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0 100%, 0 25px);
+
+            transition: clip-path 0.1s ease-out;
+
+            &:hover {
+                clip-path: polygon(50px 0%, 100% 0, 100% calc(100% - 50px), calc(100% - 50px) 100%, 0 100%, 0 50px);
+
+                video {
+                    clip-path: polygon(50px 0%, 100% 0, 100% calc(100% - 50px), calc(100% - 50px) 100%, 0 100%, 0 50px);
+                }
+            }
+
+            .champ-video-aspect-ratio {
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                width: 2.25rem;
+                height: 2.25rem;
+                border: 3px solid $colorFont;
+                box-shadow: 0 0 10px black;
+                background-color: transparent;
+                fill: $colorFont;
+                z-index: 1;
+
+                transition: all 0.1s ease-out;
+
+                &:hover {
+                    fill: $colorBackground;
+                    background-color: $colorFont;
+                }
+            }
+
+            video {
+                height: 100%;
+                width: 100%;
+                background-color: $colorBackground;
+                clip-path: polygon(25px 0%, 100% 0, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0 100%, 0 25px);
+
+                transition: clip-path 0.1s ease-out, object-fit 0.25s ease-out;
+            }
+
+            .champ-hud {
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                bottom: -20px;
+                left: 0;
+                right: 2%;
+                transform: scale(0.75);
+                z-index: 1;
+
+                .champ-icon {
+                    transform: translateX(2rem);
+                    border-radius: 50%;
+                    box-shadow: 0 0 10px 10px rgba(#000, 0.75);
+
+                    img {
+                        box-shadow: 0 0 0 5px $colorFont;
+                        border-radius: 50%;
+                    }
+
+                    .level {
+                        position: absolute;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        bottom: -10%;
+                        right: 10%;
+                        width: 2rem;
+                        height: 2rem;
+                        border-radius: 50%;
+                        border: 5px solid $colorFont;
+                        box-shadow: 0 0 10px 10px rgba(#000, 0.75);
+                        background-color: $colorBackground;
+                        font-weight: bold;
+                    }
+                }
+                .champ-deck {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 1rem 1rem 0.5rem 2.5rem;
+                    border: 5px solid $colorFont;
+                    border-bottom: none;
+                    border-radius: 10% 10px 0 0;
+                    background-image: linear-gradient(30deg, $colorBackgroundGreen, $colorBackground);
+
+                    .abilities {
+                        display: flex;
+                        align-items: flex-start;
+
+                        img,
+                        .summoner {
+                            border: 4px solid $colorFont;
+                            margin: 0 0.25rem;
+                            box-shadow: 0 0 10px black;
+                        }
+                        .passive {
+                            img {
+                                width: 3rem;
+                            }
+                        }
+                        .ability,
+                        .passive {
+                            position: relative;
+                            cursor: pointer;
+
+                            span {
+                                position: absolute;
+                                bottom: -0.5rem;
+                                left: 0;
+                                border-radius: 50%;
+                                color: $colorFont;
+                                text-shadow: 0 0 2px black;
+                                font-weight: bold;
+                            }
+
+                            &:hover {
+                                .custom-tooltip {
+                                    opacity: 1;
+                                    visibility: visible;
+                                }
+                            }
+                        }
+                        .summoner {
+                            position: relative;
+                            width: 3rem;
+                            height: 3rem;
+                            cursor: pointer;
+
+                            transition: all 0.1s ease-out;
+
+                            &:hover {
+                                background-color: $colorFont;
+
+                                svg {
+                                    fill: $colorBackground;
+                                }
+                            }
+
+                            svg {
+                                width: 100%;
+                                height: 100%;
+                                padding: 5px;
+                                fill: $colorFont;
+                            }
+
+                            span {
+                                position: absolute;
+                                bottom: -0.75rem;
+                                left: -0.5rem;
+                                color: $colorFont;
+                                text-shadow: 0 0 2px black;
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                    .game-stats {
+                        width: 100%;
+                        margin-top: 1rem;
+
+                        .life,
+                        .mana {
+                            position: relative;
+                            display: flex;
+                            justify-content: center;
+                            align-items: flex-end;
+                            width: 100%;
+                            height: 1rem;
+                            border: 1px solid black;
+                            border-left: 5px solid $colorBorder;
+                            border-right: 5px solid $colorBorder;
+
+                            font-size: 1rem;
+                            font-weight: bold;
+                            text-shadow: 0 0 10px rgba($colorBackground, 0.75);
+
+                            &::after {
+                                content: "";
+                                position: absolute;
+                                width: 100%;
+                                height: 100%;
+                                top: 0;
+                                left: 0;
+
+                                opacity: 0.8;
+                                background-image: url("https://www.transparenttextures.com/patterns/old-map.png");
+                                background-position: center;
+                                background-size: cover;
+                                background-repeat: repeat-x;
+                            }
+                        }
+
+                        .life {
+                            background-image: linear-gradient(90deg, rgb(5, 110, 15), rgb(3, 225, 0));
+                        }
+                        .mana {
+                            background-image: linear-gradient(90deg, rgb(2, 136, 162), rgb(9, 240, 232));
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767.98px) {
+    .champ-info {
+        .champ-summary {
+            h1 {
+                font-size: 3rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+
+            small {
+                font-size: 0.5rem;
+            }
+        }
+        .champ-lore {
+            div {
+                max-width: 95%;
+            }
+        }
+    }
+}

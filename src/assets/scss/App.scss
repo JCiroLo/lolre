@@ -1,0 +1,82 @@
+@import "Config";
+
+@font-face {
+    font-family: "Friz Quadrata";
+    src: url("../fonts/Friz\ Quadrata\ Regular.ttf");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "FF Mark Pro";
+    src: url("../fonts/FF\ Mark\ Pro.otf");
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* ----- PRE-CONFIGURATION ----- */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ----- LAYOUT STYLES ----- */
+
+#content {
+    background: $colorBackground;
+    min-height: 100vh;
+    color: white;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $colorFont;
+    border-radius: 0;
+
+    &:hover {
+        background: $colorFontActive;
+    }
+}
+
+::-webkit-scrollbar-track {
+    background: $colorBackground;
+    border-radius: 0px;
+}
+
+/* ----- GLOBAL STYLES ----- */
+
+.font-lol {
+    font-family: "Friz Quadrata";
+}
+
+.font-text {
+    font-family: "FF Mark Pro";
+}
+
+.btn {
+    color: $colorBackground;
+    border-radius: 0;
+}
+
+input[type="text"] {
+    min-height: 3rem;
+    height: 100%;
+
+    border-radius: 0;
+    background-color: transparent;
+    border: 0;
+}
