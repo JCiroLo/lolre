@@ -1,0 +1,9 @@
+.loading(:class='{ show }')
+  .loading-content
+    span.line
+    .backward-circle
+      .circle-lines-wrapper
+        span(v-for='i in 100' :key='i' :class='`line-${i}`')
+    .forward-circle
+      img(src="@/assets/img/favicon.png" alt="logo")
+      p.font-lol LOADING

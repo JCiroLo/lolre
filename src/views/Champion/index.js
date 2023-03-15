@@ -1,7 +1,7 @@
 import { getChampData } from '@/utils/Actions.js'
 import { mapGetters, mapMutations, mapState } from 'vuex'
-import ScrollProgress from '@/components/layout/ScrollProgress'
-import Tooltip from '@/components/layout/Tooltip'
+import ScrollProgress from '@/components/ScrollProgress'
+import Tooltip from '@/components/Tooltip'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import SwiperCore, { Pagination } from 'swiper/core'
@@ -9,7 +9,6 @@ import SwiperCore, { Pagination } from 'swiper/core'
 import 'swiper/swiper.scss'
 import 'swiper/components/pagination/pagination.min.css'
 
-// install Swiper modules
 SwiperCore.use([Pagination])
 
 export default {

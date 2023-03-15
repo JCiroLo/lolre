@@ -2,11 +2,30 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    champs: [],
+    champs: null,
     version: '',
     language: 'en_US',
     loading: true,
-    hideNavbar: false
+    hideNavbar: false,
+    champName: ''
+  },
+  getters: {
+    getSuggestions: state => champName => {
+      return champName
+        ? Object.values(state.champs).filter(champ =>
+            champ.name.toLowerCase().includes(champName.trim().toLowerCase())
+          )
+        : state.champs
+    },
+    getVersion: state => {
+      return state.version
+    },
+    getLanguage: state => {
+      return state.language
+    },
+    getHideNavbar: state => {
+      return state.hideNavbar
+    }
   },
   mutations: {
     setChamps (state, payload) {
@@ -23,25 +42,9 @@ export default createStore({
     },
     setHideNavbar (state, payload) {
       state.hideNavbar = payload
-    }
-  },
-  getters: {
-    filteredChamps: state => name => {
-      return state.champs.filter(champ =>
-        champ
-          .toLowerCase()
-          .replaceAll(' ', '')
-          .includes(name.trim().toLowerCase())
-      )
     },
-    getVersion: state => {
-      return state.version
-    },
-    getLanguage: state => {
-      return state.language
-    },
-    getHideNavbar: state => {
-      return state.hideNavbar
+    setSearchChamp (state, payload) {
+      state.champName = payload
     }
   },
   actions: {},

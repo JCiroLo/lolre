@@ -1,0 +1,28 @@
+.main-container
+  .form-champ-selector(:class="{ active: suggestions.length > 0 }")
+    form(v-on:submit.prevent="searchChamp" novalidate)
+      // img(src="@/assets/img/champion.png", alt="")
+      input.form-control.font-lol(
+        tabindex="99" 
+        v-model="champName" 
+        @keydown="e => { navigateInput(e, champName) }" 
+        type="text"
+        :placeholder="translator.home.search_text"
+      )
+    .suggestions
+      .champion-wrapper(
+        v-for="(champ, idx) in suggestions"
+        :tabindex="idx + 100" 
+        :key="idx" 
+        @click="goToLore(champ)" 
+        @keydown="e => { navigateInput(e, champ) }" 
+        :id="`nav${idx + 100}`"
+      )
+        .champion-card
+          .champion-splashart
+            img(:src="`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`" alt="splashart")
+          .champion-info
+            h3 {{ champ.name }}
+
+  br
+  p.font-text.font-weight-bold {{ translator.home.version }} {{ version }}

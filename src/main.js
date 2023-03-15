@@ -1,15 +1,15 @@
 /* eslint-disable */
 
-import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
+import Loading from './components/Loading/index.vue'
 
-import "./assets/scss/App.scss";
+import './assets/scss/App.scss'
 
-const app = createApp(App);
-
-app.use(store);
-app.use(router);
-
-app.mount("#app");
+createApp(App)
+  .use(store)
+  .use(router)
+  .component('Loading', Loading)
+  .mount('#app')

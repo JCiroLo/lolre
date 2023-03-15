@@ -207,9 +207,6 @@
   </div>
 </template>
 
-<script>
-import Champion from './Champion'
-export default Champion
-</script>
+<script src="./index.js"></script>
 
-<style lang="scss" src="./Champion.scss" scoped></style>
+<style lang="scss" src="./styles.scss" scoped></style>

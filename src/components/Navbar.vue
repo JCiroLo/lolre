@@ -2,7 +2,7 @@
   <nav class="navbar font-lol" :class="{ hide: getHideNavbar }">
     <div class="nav-content">
       <router-link class="font-lol brand" active-class="" :to="`/${language}`">
-        <img src="@/assets/favicon.png" alt="" />OLRE</router-link
+        <img src="@/assets/img/favicon.png" alt="" />OLRE</router-link
       >
       <div class="routes">
         <router-link class="font-lol" :to="`/${language}`">

@@ -1,58 +1,44 @@
-<template>
-  <Loading :show="loading" :progress="loadingProgress" />
-  <Navbar />
-  <div id="content">
-    <router-view />
-  </div>
+<template lang="pug">
+Loading(:show="loading")
+Navbar
+#content
+  router-view
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import { mapGetters, mapMutations, mapState } from "vuex";
-import { getAllData, getLatestVersion } from "@/utils/Actions";
-import Loading from "./components/layout/Loading.vue";
+import { defineComponent } from 'vue'
+import { mapMutations, mapState } from 'vuex'
+import $Actions from './utils/Actions'
 
-import Navbar from "./components/layout/Navbar.vue";
+import Navbar from './components/Navbar.vue'
 
 export default defineComponent({
   components: {
-    Navbar,
-    Loading,
-  },
-  data() {
-    return { loadingProgress: 0 };
+    Navbar
   },
   computed: {
-    ...mapState(["loading"]),
+    ...mapState(['loading'])
   },
   methods: {
-    ...mapMutations(["setChamps", "setVersion", "setLoading", "setLanguage"]),
+    ...mapMutations(['setChamps', 'setVersion', 'setLoading', 'setLanguage'])
   },
-  async beforeMount() {
-    const { data } = await getAllData();
-    const version = await getLatestVersion();
-    const champs = [];
-    for (const key in data) {
-      champs.push(key);
-    }
-    this.setChamps(champs);
-    this.setVersion(version);
+  async beforeMount () {
+    const version = await $Actions.getLatestVersion()
+    const champs = await $Actions.getAllData(version)
 
-    this.loadingProgress = 50;
+    this.setChamps(champs)
+    this.setVersion(version)
 
     if (localStorage.lang) {
-      this.setLanguage(localStorage.getItem("lang"));
+      this.setLanguage(localStorage.getItem('lang'))
     } else {
-      localStorage.setItem("lang", "en_US");
-      this.setLanguage("en_US");
+      localStorage.setItem('lang', 'en_US')
+      this.setLanguage('en_US')
     }
 
-    this.loadingProgress = 100;
-
-    setTimeout(() => this.setLoading(false), 500);
-  },
-});
+    setTimeout(() => this.setLoading(false), 500)
+  }
+})
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
